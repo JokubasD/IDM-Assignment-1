@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation;
+package tudelft.wis.idm_solutions.BoardGameTracker.JPA_Implementation;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Collection;
 import org.tinylog.Logger;
@@ -15,25 +16,22 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
  *
  * @author chris
  */
-public class BGT_Test_POJO extends tudelft.wis.idm_solutions.BoardGameTracker.AbstractBGTDemo {
+public class BGT_Test_JPA extends tudelft.wis.idm_solutions.BoardGameTracker.AbstractBGTDemo {
 
-    private BgtDataManager_POJO dataManager = new BgtDataManager_POJO();
+    private static Connection connection;
+
+    @Override
+    public Connection getConnection() throws SQLException {
+        if (connection == null) {
+            connection = DriverManager.getConnection("jdbc:duckdb:./DB/bggt.duckdb");
+
+        };
+        return connection;
+    }
 
     @Override
     public BgtDataManager getBgtDataManager() {
-        return dataManager;
-    }
-
-    /**
-     * The POJO implementation does not use databases; thus no Connection
-     * needed.
-     *
-     * @return nothing
-     * @throws SQLException
-     */
-    @Override
-    public Connection getConnection() throws SQLException {
-        return null;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -44,11 +42,11 @@ public class BGT_Test_POJO extends tudelft.wis.idm_solutions.BoardGameTracker.Ab
     public static void main(String args[]) {
 
         try {
-            BGT_Test_POJO bgtTest = new BGT_Test_POJO();
-            
-            // // Establish connection to local duck DB
-            // Connection connection = bgtTest.getConnection();
-            // Logger.info("Connected DB: " + connection.getMetaData().getURL());
+            BGT_Test_JPA bgtTest = new BGT_Test_JPA();
+
+            // Establish connection to local duck DB
+            Connection connection = bgtTest.getConnection();
+            Logger.info("Connected DB: " + connection.getMetaData().getURL());
             //
             Collection<PlaySession> sessions = bgtTest.createDummyData(12, 6);
 

@@ -20,18 +20,11 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 
 public abstract class AbstractBGTDemo implements JDBCManager {
 
-    private static Connection connection;
+
     private static Faker faker = new Faker();
     private static final Random RND = new Random();
 
-    @Override
-    public Connection getConnection() throws SQLException {
-        if (connection == null) {
-            connection = DriverManager.getConnection("jdbc:duckdb:./DB/bggt.duckdb");
 
-        };
-        return connection;
-    }
 
     /**
      * Returns a random subset of the specified collection of requested size.
