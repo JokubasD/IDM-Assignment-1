@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.tinylog.Logger;
+import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BgtDataManager;
@@ -20,11 +21,8 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 
 public abstract class AbstractBGTDemo implements JDBCManager {
 
-
     private static Faker faker = new Faker();
     private static final Random RND = new Random();
-
-
 
     /**
      * Returns a random subset of the specified collection of requested size.
@@ -69,7 +67,7 @@ public abstract class AbstractBGTDemo implements JDBCManager {
      *
      * @return
      */
-    public Collection<PlaySession> createDummyData(int numOfPlayers, int numOfSessions) throws SQLException {
+    public Collection<PlaySession> createDummyData(int numOfPlayers, int numOfSessions) throws BgtException {
         Collection<PlaySession> sessions = new LinkedList<PlaySession>();
         Collection<Player> players = new LinkedList<Player>();
         Collection<BoardGame> games = new LinkedList<BoardGame>();
