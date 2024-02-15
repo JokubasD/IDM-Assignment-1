@@ -65,7 +65,6 @@ public interface BgtDataManager {
      * @param winner the one player who won (NULL in case of no winner; multiple
      * winners not supported)
      * @return the new play session
-     * @throws SQLException DB trouble
      */
     public PlaySession createNewPlaySession(Date date, Player host, BoardGame game, int playtime, Collection<Player> players, Player winner) throws BgtException;
 

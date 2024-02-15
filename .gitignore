@@ -2,3 +2,4 @@
 /target/
 /db/bggt.duckdb
 /db/bggt.duckdb.wal
+/nbproject/
