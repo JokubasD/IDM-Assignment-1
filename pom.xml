@@ -40,30 +40,8 @@
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
         </dependency>
-<<<<<<< HEAD
-=======
 
->>>>>>> f869d13e0b04255c0c6b236d32100fa9550a1451
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.6.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.6.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.6.0</version>
-            <scope>test</scope>
-        </dependency>
-<<<<<<< HEAD
-=======
+
       
        <dependency>
             <groupId>org.postgresql</groupId>
@@ -76,7 +54,12 @@
             <artifactId>ojdbc8</artifactId>
             <version>19.6.0.0</version>
         </dependency>
-
->>>>>>> f869d13e0b04255c0c6b236d32100fa9550a1451
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>
