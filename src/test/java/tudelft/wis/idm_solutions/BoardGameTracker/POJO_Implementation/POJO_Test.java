@@ -7,7 +7,6 @@ package tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
-import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.tinylog.Logger;
@@ -45,7 +44,9 @@ public class POJO_Test extends tudelft.wis.idm_solutions.BoardGameTracker.Abstra
     }
 
     /**
-     * Just runs the application with some simple queries.
+     * Just runs the application with some simple queries and assertions.
+     * It's not very comprehensive, essentially, just a single session is retrieved 
+     * and the hist and the game is being checked.
      *
      * @param args
      */
@@ -66,9 +67,15 @@ public class POJO_Test extends tudelft.wis.idm_solutions.BoardGameTracker.Abstra
             Player host = firstsession.getHost();
             BoardGame game = firstsession.getGame();
 
-            // retrieve the host from the database
+            // retrieve the host from the database and check if it returns correctly
             Player retrievedPlayer = this.getBgtDataManager().findPlayersByName(host.getPlayerName()).iterator().next();
-            assertEquals(retrievedPlayer.getPlayerName(), retrievedPlayer.getPlayerNickName());
+            assertEquals(retrievedPlayer.getPlayerNickName(), retrievedPlayer.getPlayerNickName());
+            assertEquals(retrievedPlayer.getGameCollection().size(), host.getGameCollection().size());
+
+            // retrieve the game from the database and check if it returns correctly
+            BoardGame retrievedGame = this.getBgtDataManager().findGamesByName(game.getName()).iterator().next();
+            assertEquals(retrievedGame.getBGG_URL(), game.getBGG_URL());
+            
 
         } catch (Exception e) {
             throw new RuntimeException(e);
