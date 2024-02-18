@@ -4,10 +4,8 @@
  */
 package tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation;
 
-import com.github.javafaker.GameOfThrones;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
@@ -51,17 +49,35 @@ public class BgtDataManager_POJO implements BgtDataManager {
 
     @Override
     public Collection<Player> findPlayersByName(String name) throws BgtException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Collection<Player> result = new LinkedList<Player>();
+        for (Player_POJO player : players) {
+            if (player.getPlayerName().contains(name)) {
+                result.add(player);
+            }
+        }
+        return result;
     }
 
     @Override
     public Collection<BoardGame> findGamesByName(String name) throws BgtException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Collection<BoardGame> result = new LinkedList<BoardGame>();
+        for (BoardGame_POJO game : games) {
+            if (game.getName().contains(name)) {
+                result.add(game);
+            }
+        }
+        return result;
     }
 
     @Override
     public Collection<PlaySession> findSessionByDate(Date date) throws BgtException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Collection<PlaySession> result = new LinkedList<PlaySession>();
+        for (PlaySession_POJO session : sessions) {
+            if (session.getDate().equals(date)) {
+                result.add(session);
+            }
+        }
+        return result;
     }
 
 }
