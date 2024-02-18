@@ -49,4 +49,9 @@ public class Player_POJO implements Player {
         this.nickName = nickName;
     }
 
+    @Override
+    public void addGameToCollection(BoardGame game) {
+        this.gameCollection.add(game);
+    }
+
 }

@@ -21,7 +21,7 @@ public interface JDBCTask2Interface {
      * @todo ...
      * @return 
      */
-    public Collection<String> getTitlesPerYear();
+    public Collection<String> getTitlesPerYear(int year);
     
     
     /**
