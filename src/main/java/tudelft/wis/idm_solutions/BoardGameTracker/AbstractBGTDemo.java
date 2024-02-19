@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.tinylog.Logger;
 import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
@@ -73,12 +74,6 @@ public abstract class AbstractBGTDemo implements JDBCManager {
         Collection<BoardGame> games = new LinkedList<BoardGame>();
         BgtDataManager dbManager = getBgtDataManager();
 
-        // create players
-        for (int i = 0; i < numOfPlayers; i++) {
-            Player newPlayer = dbManager.createNewPlayer(faker.name().fullName(), faker.pokemon().name());
-            players.add(newPlayer);
-        }
-
         // create 5 games
         {
             games.add(dbManager.createNewBoardgame("Eclipse: Second Dawn", "https://boardgamegeek.com/boardgame/246900/eclipse-second-dawn-galaxy"));
@@ -86,6 +81,17 @@ public abstract class AbstractBGTDemo implements JDBCManager {
             games.add(dbManager.createNewBoardgame("Wingspan", "https://boardgamegeek.com/boardgame/266192/wingspan"));
             games.add(dbManager.createNewBoardgame("Cthulhu Wars", "https://boardgamegeek.com/boardgame/139976/cthulhu-warsf"));
             games.add(dbManager.createNewBoardgame("Nemesis: Lockdown", "https://boardgamegeek.com/boardgame/310100/nemesis-lockdown"));
+        }
+
+        // create players
+        for (int i = 0; i < numOfPlayers; i++) {
+            Player newPlayer = dbManager.createNewPlayer(faker.name().fullName(), faker.pokemon().name());
+            Collection<BoardGame> playerGames = rndSubset(games, RND.nextInt(3));
+            for (BoardGame game : playerGames) {
+                newPlayer.getGameCollection().add(game);
+            }
+
+            players.add(newPlayer);
         }
 
         // create 5 play serssions

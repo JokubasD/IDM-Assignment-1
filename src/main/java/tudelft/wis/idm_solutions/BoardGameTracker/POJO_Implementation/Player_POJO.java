@@ -5,6 +5,7 @@
 package tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
@@ -18,7 +19,7 @@ public class Player_POJO implements Player {
 
     private String name;
     private String nickName;
-    private Collection<BoardGame> gameCollection;
+    private Collection<BoardGame> gameCollection = new LinkedList<BoardGame>();
 
     @Override
     public String getPlayerName() {
