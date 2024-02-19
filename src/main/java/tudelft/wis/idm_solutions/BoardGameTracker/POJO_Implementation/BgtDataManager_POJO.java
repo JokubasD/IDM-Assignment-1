@@ -80,4 +80,19 @@ public class BgtDataManager_POJO implements BgtDataManager {
         return result;
     }
 
+    @Override
+    public void persistPlayer(Player player) {
+     // do nothing as there is no DB...
+    }
+
+    @Override
+    public void persistPlaySession(PlaySession session) {
+     // do nothing as there is no DB...    
+    }
+
+    @Override
+    public void persistBoardGame(BoardGame game) {
+     // do nothing as there is no DB...    
+    }
+
 }

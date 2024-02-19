@@ -20,8 +20,14 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BgtDataManager;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 
-public abstract class AbstractBGTDemo implements JDBCManager {
-
+/**
+ * Abstract implementation of a test class for the BGT. Can create random data
+ * and has some other helper methods.
+ *
+ *
+ */
+public abstract class AbstractBGTDemo {
+    
     private static Faker faker = new Faker();
     private static final Random RND = new Random();
 
@@ -43,16 +49,16 @@ public abstract class AbstractBGTDemo implements JDBCManager {
         if (count > c.size()) {
             throw new IllegalArgumentException("Subset cannot be bigger than the original set: " + count);
         }
-
+        
         final List<T> ret = new ArrayList<T>(count);
         final List<T> tmp = new ArrayList<T>(c);
-
+        
         for (int i = 0; i < count; i++) {
             final int toRemove = RND.nextInt(tmp.size());
             ret.add(tmp.get(toRemove));
             tmp.remove(toRemove);
         }
-
+        
         return ret;
     }
 
@@ -90,7 +96,10 @@ public abstract class AbstractBGTDemo implements JDBCManager {
             for (BoardGame game : playerGames) {
                 newPlayer.getGameCollection().add(game);
             }
-
+            // Those games in the gameCollection are added AFTER the player was created. 
+            // We thus need to persist it again to refelct that change.
+            dbManager.persistPlayer(newPlayer);
+            
             players.add(newPlayer);
         }
 
@@ -102,5 +111,5 @@ public abstract class AbstractBGTDemo implements JDBCManager {
         }
         return sessions;
     }
-
+    
 }

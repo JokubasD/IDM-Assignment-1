@@ -38,6 +38,10 @@ public interface BgtDataManager {
     /**
      * Creates a new board game and stores it in the DB.
      *
+     * Note: These "create" methods are somewhat unnecessary. However, I put
+     * them here to make the task test a bit easier. You can call an appropriate
+     * persist method for this.
+     *
      * @param name name of the game
      * @param bggURL the URL of the game at boardgamesGeek.com
      * @return the new game
@@ -76,5 +80,23 @@ public interface BgtDataManager {
      * @throws BgtException
      */
     public Collection<PlaySession> findSessionByDate(Date date) throws BgtException;
+
+    /**
+     * Persists a given player to the DB.
+     * @param player 
+     */
+    public void persistPlayer(Player player);
+
+    /**
+     * Persists a given session to the DB.
+     * @param session 
+     */
+    public void persistPlaySession(PlaySession session);
+
+    /**
+     * Persists a given game to the DB.
+     * @param game 
+     */
+    public void persistBoardGame(BoardGame game);
 
 }

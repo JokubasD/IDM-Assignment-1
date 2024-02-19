@@ -41,10 +41,6 @@ public class Player_POJO implements Player {
         return gameCollection;
     }
 
-    @Override
-    public void addGameToCollection(BoardGame game) {
-        this.gameCollection.add(game);
-    }
 
     @Override
     public String toVerboseString() {

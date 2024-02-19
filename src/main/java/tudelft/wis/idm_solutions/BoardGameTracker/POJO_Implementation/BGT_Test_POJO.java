@@ -24,17 +24,7 @@ public class BGT_Test_POJO extends tudelft.wis.idm_solutions.BoardGameTracker.Ab
         return dataManager;
     }
 
-    /**
-     * The POJO implementation does not use databases; thus no Connection
-     * needed.
-     *
-     * @return nothing
-     * @throws SQLException
-     */
-    @Override
-    public Connection getConnection() throws SQLException {
-        return null;
-    }
+
 
     /**
      * Just runs the application with some simple queries.

@@ -28,13 +28,7 @@ public interface Player {
      * @return the collection 
      */
     public Collection<BoardGame> getGameCollection(); 
-    
-    /**
-     * Adds a new game to the collection of a player
-     * @param game 
-     */
-    public void addGameToCollection(BoardGame game);
-    
+   
     
     /**
      * Creates a human-readable string representation of this object
