@@ -25,7 +25,7 @@ public interface Player {
     
     /**
      * Returns the Collection of board games this player owns (if any).
-     * @return the collection
+     * @return the collection 
      */
     public Collection<BoardGame> getGameCollection(); 
     

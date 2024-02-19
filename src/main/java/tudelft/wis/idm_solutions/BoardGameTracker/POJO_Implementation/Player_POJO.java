@@ -21,6 +21,11 @@ public class Player_POJO implements Player {
     private String nickName;
     private Collection<BoardGame> gameCollection = new LinkedList<BoardGame>();
 
+    public Player_POJO(String name, String nickName) {
+        this.name = name;
+        this.nickName = nickName;
+    }
+
     @Override
     public String getPlayerName() {
         return name;
@@ -37,22 +42,17 @@ public class Player_POJO implements Player {
     }
 
     @Override
+    public void addGameToCollection(BoardGame game) {
+        this.gameCollection.add(game);
+    }
+
+    @Override
     public String toVerboseString() {
         String result = name;
         if (nickName != null) {
             result = result + " (" + nickName + ")";
         }
         return result;
-    }
-
-    public Player_POJO(String name, String nickName) {
-        this.name = name;
-        this.nickName = nickName;
-    }
-
-    @Override
-    public void addGameToCollection(BoardGame game) {
-        this.gameCollection.add(game);
     }
 
 }
