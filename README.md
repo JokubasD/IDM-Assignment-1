@@ -33,7 +33,7 @@ General:
 tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation. This implementation 
 does not use any database persistence, but instead stores all data in POJOs (plain old java objects). It still can guide you
 towards your own JDBC/JPA implementation.
--  TEST the reference implementation: Find tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation.POJO_Test.java. Execute this class as a JUNIT Test!
+-  TEST the reference implementation: Find `tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation.POJO_Test.java`. Execute this class as a JUNIT Test!
 (in Netbeans, that is simply done with right-click/test-file.) Try to figure out what is happening when you do that!
 
 JDBC:
