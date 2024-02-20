@@ -26,6 +26,7 @@ public interface JDBCTask2Interface {
      * @return A collection of strings of the resulting primary titles
      */
     public Collection<String> getTitlesPerYear(int year);
+        // @TODO: Implement this method. Use parameterized prepared statements for the query!
 
     /**
      * Lists all the job categories for titles that include a specific string in their primary title.

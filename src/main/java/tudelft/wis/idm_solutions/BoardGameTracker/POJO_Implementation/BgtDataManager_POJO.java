@@ -18,7 +18,7 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
  * Implements an in-memory POJO database using Linked Lists. This is sooooo
  * insanely bad, it could even be for Osiris...
  *
- * @author chris
+ * @author Christoph Lofi, Alexnadra Neagu
  */
 public class BgtDataManager_POJO implements BgtDataManager {
 
@@ -82,17 +82,17 @@ public class BgtDataManager_POJO implements BgtDataManager {
 
     @Override
     public void persistPlayer(Player player) {
-     // do nothing as there is no DB...
+     // Do nothing as there is no DB...
     }
 
     @Override
     public void persistPlaySession(PlaySession session) {
-     // do nothing as there is no DB...    
+     // Do nothing as there is no DB...
     }
 
     @Override
     public void persistBoardGame(BoardGame game) {
-     // do nothing as there is no DB...    
+     // Do nothing as there is no DB...
     }
 
 }
