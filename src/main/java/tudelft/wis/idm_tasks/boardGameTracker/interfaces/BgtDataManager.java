@@ -82,19 +82,19 @@ public interface BgtDataManager {
     public Collection<PlaySession> findSessionByDate(Date date) throws BgtException;
 
     /**
-     * Persists a given player to the DB.
+     * Persists a given player to the DB. Note that this player might already exist and only needs an update :-)
      * @param player 
      */
     public void persistPlayer(Player player);
 
     /**
-     * Persists a given session to the DB.
+     * Persists a given session to the DB. Note that this session might already exist and only needs an update :-)
      * @param session 
      */
     public void persistPlaySession(PlaySession session);
 
     /**
-     * Persists a given game to the DB.
+     * Persists a given game to the DB. Note that this game might already exist and only needs an update :-)
      * @param game 
      */
     public void persistBoardGame(BoardGame game);
