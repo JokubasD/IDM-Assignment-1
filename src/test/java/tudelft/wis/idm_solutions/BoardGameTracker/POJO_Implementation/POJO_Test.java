@@ -31,11 +31,9 @@ public class POJO_Test extends tudelft.wis.idm_solutions.BoardGameTracker.Abstra
         return dataManager;
     }
 
-
-
     /**
-     * Just runs the application with some simple queries and assertions.
-     * It's not very comprehensive, essentially, just a single session is retrieved 
+     * Just runs the application with some simple queries and assertions. It's
+     * not very comprehensive, essentially, just a single session is retrieved
      * and the hist and the game is being checked.
      *
      * @param args
@@ -65,8 +63,13 @@ public class POJO_Test extends tudelft.wis.idm_solutions.BoardGameTracker.Abstra
             // retrieve the game from the database and check if it returns correctly
             BoardGame retrievedGame = this.getBgtDataManager().findGamesByName(game.getName()).iterator().next();
             assertEquals(retrievedGame.getBGG_URL(), game.getBGG_URL());
-            
 
+            // retrieve session by date
+            Collection<PlaySession> retrievedSession = this.getBgtDataManager().findSessionByDate(firstsession.getDate());
+            assertEquals(firstsession.getDate(), retrievedSession.iterator().next().getDate());
+
+            // remove a game from the host's collection, add  it again
+            
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
