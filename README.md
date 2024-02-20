@@ -6,8 +6,8 @@ This is what you have to do.
 
 ## Setup
 - Clone this GITHUB repository using your favorite Git client (this can be your IDE of choice, the command line, or the GitHub Desktop software)
-- We strongly recommend using an IDE for the following tasks. You need an IDE which supports both Java and Maven. I personally use Netbeans (matter of taste, it's nice
-but not perfect), also IntelliJ or Eclipse are of course nice. Open the cloned project with your IDE (as a Maven Java Project), then explore the codebase a bit.
+- We strongly recommend using an IDE for the following tasks. You need an IDE which supports both Java and Maven. I personally use IntellJ (matter of taste, it's nice
+but not perfect), also Netbeans or Eclipse are of course nice (but Thomas doesn't like them...). Open the cloned project with your IDE (as a Maven Java Project), then explore the codebase a bit.
 - In case you have never used Maven, look up what Maven is, and check out the `POM.XML` file in the project.
 
 ## Task 2.1 (SQL Queries using JDBC)
@@ -34,7 +34,7 @@ General:
 does not use any database persistence, but instead stores all data in POJOs (plain old java objects). It still can guide you
 towards your own JDBC/JPA implementation.
 -  TEST the reference implementation: Find `tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation.POJO_Test.java`. Execute this class as a JUNIT Test!
-(in Netbeans, that is simply done with right-click/test-file.) Try to figure out what is happening when you do that!
+ Try to figure out what is happening when you do that!
 
 JDBC:
 - Create a new database for this task. Create the tables you will later need.
