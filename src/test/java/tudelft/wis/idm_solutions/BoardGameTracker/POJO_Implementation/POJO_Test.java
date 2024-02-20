@@ -59,6 +59,7 @@ public class POJO_Test extends tudelft.wis.idm_solutions.BoardGameTracker.Abstra
         Player retrievedPlayer = this.getBgtDataManager().findPlayersByName(host.getPlayerName()).iterator().next();
         assertEquals(retrievedPlayer.getPlayerNickName(), retrievedPlayer.getPlayerNickName());
         assertEquals(retrievedPlayer.getGameCollection().size(), host.getGameCollection().size());
+        Logger.info("Player check passed: " + retrievedPlayer.getPlayerName() + "; collectionSize: " + retrievedPlayer.getGameCollection().size());
 
         // retrieve the game from the database and check if it returns correctly
         BoardGame retrievedGame = this.getBgtDataManager().findGamesByName(game.getName()).iterator().next();
