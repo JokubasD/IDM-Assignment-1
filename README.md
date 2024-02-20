@@ -27,6 +27,7 @@ We ask you to implement the the interfaces found in package tudelft.wis.idm_task
 Here are some tips to do that:
 
 General:
+- Inspect and understand all the interfaces in the package tudelft.wis.idm_tasks.boardGameTracker.interfaces
 - Have a close look the very basic reference implementation the package 
 tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation. This implementation 
 does not use any databases, but instead stores all data in POJOs (plain old java objects).
@@ -40,20 +41,17 @@ JDBC:
 -- Player.java
 -- BoardGame.java
 -- BgtDataManager.java, all methods which relate to Player and Boardgame (but not those on PLaySession unless you feel like it).
+- Make a copy of the POJO_Test.java Junit Test class, and adapt it to test your JDBC implementation. Remove the tests for PlaySession if
+you didn't implement PlaySession functionality.
+- Run the test class as a JUNIT test. oOpy-Paste the Console Output into your Brightspace submission file. 
 
 JPA
 - You have two choices: re-use the databse you created for the JDBC task and tweak your JPA implementation to use it, 
-or create a new empty database (this might be easier).
+or create a new empty database and have JPA take care of the rest (this might be easier).
+- You can use this quickstart tutorial (or any other you find) to guide you along: https://docs.jboss.org/hibernate/orm/6.4/quickstart/html_single/#tutorial_jpa
+- Setup an appropriate persistence.xml file
+- Implement all interfaces
+- Make a copy of the POJO_Test.java Junit Test class, and adapt it to test your JPA implementation. The tests for PlaySession need to remain this time!
+- Run the test class as a JUNIT test. Copy-Paste the Console Output into your Brightspace submission file. 
 
-
-
-IGNORE TEXT AFTER THIS: WIP
-
-using either pure JDBC or JPA (refer to additional turorial for this task,s earch if you need to)
-- Implement tudelft.wis.idm_solutions.BoardGameTracker.AbstractBGTDemo.java to run / test your implementation.
-- See tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation.BGT_test_Pojo.java for a reference implementation using POJO (Plain Old Java Objects) -- no database functionality here!!
-    - You can develop your own JPA solution in tudelft.wis.idm_solutions.BoardGameTracker.JPA_Implementation. 
-- Feel free to expand on BGT_Test_JPA.java. Note how this class uses DuckDB (look it up!). Duck DB is super easy to embed, and will store all data in a local database file ./DB. I used it here because it is dead simple and does not require any server setup.
-    - Feel free to use DuckDB, or switch to PosgreSQL. Your choice.
-    - Remember that you some need to deal with primary keys. The current interfaces and the POJO implementation do not consider that.
 
