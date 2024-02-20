@@ -47,6 +47,8 @@ or create a new empty database (this might be easier).
 
 
 
+IGNORE TEXT AFTER THIS: WIP
+
 using either pure JDBC or JPA (refer to additional turorial for this task,s earch if you need to)
 - Implement tudelft.wis.idm_solutions.BoardGameTracker.AbstractBGTDemo.java to run / test your implementation.
 - See tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation.BGT_test_Pojo.java for a reference implementation using POJO (Plain Old Java Objects) -- no database functionality here!!
