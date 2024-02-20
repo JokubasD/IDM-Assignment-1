@@ -13,7 +13,7 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
  * POJO (Plain Old Java Object) Implementation without any database
  * functionality.
  *
- * @author chris
+ * @author Christoph Lofi, Alexandra Neagu
  */
 public class Player_POJO implements Player {
 
@@ -21,6 +21,12 @@ public class Player_POJO implements Player {
     private String nickName;
     private Collection<BoardGame> gameCollection = new LinkedList<BoardGame>();
 
+    /**
+     * Instantiates a new Player POJO.
+     *
+     * @param name     name
+     * @param nickName nickname
+     */
     public Player_POJO(String name, String nickName) {
         this.name = name;
         this.nickName = nickName;

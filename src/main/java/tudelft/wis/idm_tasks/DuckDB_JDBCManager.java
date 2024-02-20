@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 /**
  * This simple JDBC manager returns a (shared) connection to a local file system embedded DuckDB instance.
- * This is a somewhat lazy implementation which just uses a static field for pooling....
+ * This is a somewhat lazy implementation which just uses a static field for pooling...
  *
- * @author Chris
+ * @author Christoph Lofi, Alexandra Neagu
  */
 public class DuckDB_JDBCManager implements JDBCManager {
 

@@ -14,7 +14,7 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
  * POJO (Plain Old Java Object) Implementation without any database
  * functionality.
  *
- * @author chris
+ * @author Christoph Lofi, Alexandra Neagu
  */
 public class PlaySession_POJO implements PlaySession {
 
@@ -69,6 +69,16 @@ public class PlaySession_POJO implements PlaySession {
         return result;
     }
 
+    /**
+     * Instantiates a new Play session POJO.
+     *
+     * @param date     the date
+     * @param host     the host
+     * @param game     the game
+     * @param playTime the play time
+     * @param players  the players
+     * @param winner   the winner
+     */
     public PlaySession_POJO(Date date, Player host, BoardGame game, int playTime, Collection<Player> players, Player winner) {
         this.date = date;
         this.host = host;

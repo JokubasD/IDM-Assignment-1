@@ -1,30 +1,20 @@
 package tudelft.wis.idm_solutions.BoardGameTracker;
 
 import com.github.javafaker.Faker;
-import tudelft.wis.idm_tasks.basicJDBC.interfaces.JDBCManager;
-
-import java.sql.SQLException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import org.tinylog.Logger;
 import tudelft.wis.idm_tasks.boardGameTracker.BgtException;
-import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
-import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BgtDataManager;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
+import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
+import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
- * Abstract implementation of a test class for the BGT. Can create random data
+ * An abstract implementation of a test class for the BGT. Can create random data
  * and has some other helper methods.
  *
- *
+ * @author Christoph Lofi, Alexandra Neagu
  */
 public abstract class AbstractBGTDemo {
     
@@ -34,10 +24,10 @@ public abstract class AbstractBGTDemo {
     /**
      * Returns a random subset of the specified collection of requested size.
      *
-     * @param <T> Type parameter.
-     * @param c Collection to pick from.
-     * @param count Requested size of the subset.
-     * @return List of randomly picked elements of the collection.
+     * @param <T>   type parameter
+     * @param c     collection to pick from
+     * @param count requested size of the subset
+     * @return list of randomly picked elements of the collection
      */
     public static <T> List<T> rndSubset(final Collection<T> c, final int count) {
         if (c == null) {
@@ -65,14 +55,17 @@ public abstract class AbstractBGTDemo {
     /**
      * Returns an instance of BgtDataFactory which can create new BGT objects.
      *
-     * @return
+     * @return BgtDataManager instance
      */
     public abstract BgtDataManager getBgtDataManager();
 
     /**
      * Creates several players and games, and adds them to the DB.
      *
-     * @return
+     * @param numOfPlayers  the num of players
+     * @param numOfSessions the num of sessions
+     * @return collection of the play sessions
+     * @throws BgtException the bgt exception
      */
     public Collection<PlaySession> createDummyData(int numOfPlayers, int numOfSessions) throws BgtException {
         Collection<PlaySession> sessions = new LinkedList<PlaySession>();
@@ -80,7 +73,7 @@ public abstract class AbstractBGTDemo {
         Collection<BoardGame> games = new LinkedList<BoardGame>();
         BgtDataManager dbManager = getBgtDataManager();
 
-        // create 5 games
+        // Create 5 games
         {
             games.add(dbManager.createNewBoardgame("Eclipse: Second Dawn", "https://boardgamegeek.com/boardgame/246900/eclipse-second-dawn-galaxy"));
             games.add(dbManager.createNewBoardgame("Everdell", "https://boardgamegeek.com/boardgame/199792/everdell"));
@@ -89,7 +82,7 @@ public abstract class AbstractBGTDemo {
             games.add(dbManager.createNewBoardgame("Nemesis: Lockdown", "https://boardgamegeek.com/boardgame/310100/nemesis-lockdown"));
         }
 
-        // create players
+        // Create players
         for (int i = 0; i < numOfPlayers; i++) {
             Player newPlayer = dbManager.createNewPlayer(faker.name().fullName(), faker.pokemon().name());
             Collection<BoardGame> playerGames = rndSubset(games, RND.nextInt(3));
@@ -97,13 +90,13 @@ public abstract class AbstractBGTDemo {
                 newPlayer.getGameCollection().add(game);
             }
             // Those games in the gameCollection are added AFTER the player was created. 
-            // We thus need to persist it again to refelct that change.
+            // We thus need to persist it again to reflect that change.
             dbManager.persistPlayer(newPlayer);
             
             players.add(newPlayer);
         }
 
-        // create 5 play serssions
+        // Create 5 play sessions
         for (int i = 0; i < numOfSessions; i++) {
             Collection<Player> sessionPlayers = rndSubset(players, 2 + RND.nextInt(4));
             PlaySession newSession = dbManager.createNewPlaySession(faker.date().past(365, TimeUnit.DAYS), rndSubset(sessionPlayers, 1).getFirst(), rndSubset(games, 1).getFirst(), 90 + RND.nextInt(90), sessionPlayers, rndSubset(sessionPlayers, 1).getFirst());
