@@ -10,7 +10,7 @@ This is what you have to do.
 but not perfect), also IntelliJ or Eclipse are of course nice. Open the cloned project with your IDE (as a Maven Java Project), explore a bit.
 - In case you have never used Maven, look up what Maven is and does, and check out the POM.XML file
 
-## Task 1.2 (SQL Queries using JDBC)
+## Task 2.1 (SQL Queries using JDBC)
 Please implement the interface found package tudelft.wis.idm_tasks.basicJDBC.interfaces.
 - Start with implementing the JDBCManager.java interface. You need to be able to connect to your PostgreSQL database with the IMDB dataset
 - Implement JDBCTask2Interface.java as described in the assignment task PDF.
@@ -18,7 +18,7 @@ Please implement the interface found package tudelft.wis.idm_tasks.basicJDBC.int
  result sets of each task to the console. Use that console printout in your Brightspace submission to show that you solved this task .
 (i.e., copy-pase the console printout of the result sets in your submission file).
 
-## Task 1.3 (Boardgame Tracker with JDBC / JPA)
+## Task 2.2 (Boardgame Tracker with JDBC / JPA)
 In this task, you are going to learn how to implement Java object persistence using JDBC and JPA/Hibernate
 (and passively also deal a bit with Maven, GIT, and JUNIT - search teh Web / discuss).
 with peers or TAs if you need help with those things 
@@ -27,7 +27,7 @@ We ask you to implement the the interfaces found in package tudelft.wis.idm_task
 Here are some tips to do that:
 
 General:
-- Inspect and understand all the interfaces in the package tudelft.wis.idm_tasks.boardGameTracker.interfaces
+- Inspect and understand all the interfaces in the package tudelft.wis.idm_tasks.boardGameTracker.interfaces.
 - Have a close look the very basic reference implementation the package 
 tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation. This implementation 
 does not use any databases, but instead stores all data in POJOs (plain old java objects).
