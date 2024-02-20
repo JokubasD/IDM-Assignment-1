@@ -11,7 +11,7 @@ but not perfect), also IntelliJ or Eclipse are of course nice. Open the cloned p
 - In case you have never used Maven, look up what Maven is, and check out the POM.XML file in the project.
 
 ## Task 2.1 (SQL Queries using JDBC)
-Please implement the interface found package tudelft.wis.idm_tasks.basicJDBC.interfaces.
+Please implement the interface found package 'tudelft.wis.idm_tasks.basicJDBC.interfaces'.
 - Start with implementing the JDBCManager.java interface. You need to be able to connect to your PostgreSQL database with the IMDB dataset
 - Implement JDBCTask2Interface.java as described in the assignment task PDF.
 - Write a short class which calls all methods of your Task2Interface implementation, and prints the retrieved
