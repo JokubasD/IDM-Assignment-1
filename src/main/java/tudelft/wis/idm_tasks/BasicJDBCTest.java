@@ -52,22 +52,42 @@ public class BasicJDBCTest {
 
             @Override
             public Collection<String> getPlayedCharacters(String actorFullname) {
-                // Implement method to retrieve played characters by an actor
-                return null;
+                List<String> titles = new ArrayList<>();
+                try (Connection connection = getConnection();
+                     PreparedStatement statement = connection.prepareStatement("SELECT tpc.character_name " +
+                             "FROM persons p " +
+                             "JOIN title_person_character tpc ON p.person_id = tpc. person_id " +
+                             "WHERE p.full_name = ?" +
+                             " LIMIT 20")) {
+                    statement.setString(1, actorFullname);
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        while (resultSet.next()) {
+                            titles.add(resultSet.getString("character_name"));
+                        }
+                    }
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                return titles;
             }
         };
 
         try {
             Connection connection = jdbcTask2Interface.getConnection();
             System.out.println("Connected to the database.");
-            Collection<String> printable = jdbcTask2Interface.getTitlesPerYear(2022);
-            for (String title : printable) {
-                System.out.println(title);
-            }
+            Collection<String> query1 = jdbcTask2Interface.getTitlesPerYear(2022);
+            System.out.println("Query 1 - First 20 titles that were released in 2022: ");
+            printResults(query1);
+            Collection<String> query4 = jdbcTask2Interface.getPlayedCharacters("Brad Pitt");
+            System.out.println("Query 4 - All characters that are played by Brad Pitt: ");
+            printResults(query4);
             connection.close();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    public static void printResults(Collection<String> items){
+        System.out.println(String.join(", ", items));
     }
 
 }
