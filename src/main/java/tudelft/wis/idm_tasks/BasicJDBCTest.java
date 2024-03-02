@@ -13,6 +13,7 @@ public class BasicJDBCTest {
         JDBCTask2Interface jdbcTask2Interface = new JDBCTask2Interface() {
             private static final String URL = "jdbc:postgresql://localhost:5432/imdb";
             private static final String USERNAME = "postgres";
+
             private static final String PASSWORD = "";
 
             @Override
@@ -40,8 +41,22 @@ public class BasicJDBCTest {
 
             @Override
             public Collection<String> getJobCategoriesFromTitles(String searchString) {
-                // Implement method to retrieve job categories from titles in the database
-                return null;
+                List<String> jobs = new ArrayList<>();
+                try (Connection connection = getConnection();
+                     PreparedStatement statement = connection.prepareStatement("SELECT DISTINCT t.primary_title, t.title_id , ci.job_category " +
+                             "FROM titles t " +
+                             "JOIN cast_info ci ON t.title_id = ci.title_id " +
+                             "WHERE t.primary_title LIKE ? LIMIT 20")) {
+                    statement.setString(1, "%" + searchString + "%");
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        while (resultSet.next()) {
+                            jobs.add(resultSet.getString("job_category"));
+                        }
+                    }
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                return jobs;
             }
 
             @Override
