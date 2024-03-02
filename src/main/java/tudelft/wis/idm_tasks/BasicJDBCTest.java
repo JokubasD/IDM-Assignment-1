@@ -14,7 +14,7 @@ public class BasicJDBCTest {
         JDBCTask2Interface jdbcTask2Interface = new JDBCTask2Interface() {
             private static final String URL = "jdbc:postgresql://localhost:5432/imdb";
             private static final String USERNAME = "postgres";
-            private static final String PASSWORD = "";
+            private static final String PASSWORD = "Sanoma1705";
             @Override
             public Connection getConnection() throws ClassNotFoundException, SQLException {
                 Class.forName("org.postgresql.Driver");
