@@ -61,7 +61,18 @@ public class BasicJDBCTest {
             @Override
             public double getAverageRuntimeOfGenre(String genre) {
                 // Implement method to calculate average runtime of a genre
-                return 0; // Placeholder return value
+                double average = -1;
+                try (Connection connection = getConnection();
+                     PreparedStatement statement = connection.prepareStatement("SELECT AVG(t.runtime) AS average FROM titles_genres tg JOIN titles t ON tg.title_id = t.title_id WHERE tg.genre=?")) {
+                    statement.setString(1, genre);
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        resultSet.next();
+                        average = resultSet.getDouble("average");
+                    }
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                return average;
             }
 
             @Override
@@ -93,8 +104,11 @@ public class BasicJDBCTest {
             System.out.println("Query 1 - First 20 titles that were released in 2022: ");
             printResults(query1);
             Collection<String> query2 = jdbcTask2Interface.getJobCategoriesFromTitles("mario");
-            System.out.println("Query 2 - Categories that are related to the word mario");
+            System.out.println("Query 2 - Categories that are related to the word mario: ");
             printResults(query2);
+            double query3 = jdbcTask2Interface.getAverageRuntimeOfGenre("Action");
+            System.out.println("Query 3 - Average runtime for the genre action: ");
+            System.out.println(String.format("%.2f", query3) + " minutes.");
             Collection<String> query4 = jdbcTask2Interface.getPlayedCharacters("Brad Pitt");
             System.out.println("Query 4 - All characters that are played by Brad Pitt: ");
             printResults(query4);
