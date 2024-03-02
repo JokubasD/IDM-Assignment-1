@@ -1,6 +1,5 @@
 package tudelft.wis.idm_tasks;
 
-import tudelft.wis.idm_tasks.basicJDBC.interfaces.JDBCManager;
 import tudelft.wis.idm_tasks.basicJDBC.interfaces.JDBCTask2Interface;
 
 import java.sql.*;
@@ -43,7 +42,7 @@ public class BasicJDBCTest {
             public Collection<String> getJobCategoriesFromTitles(String searchString) {
                 List<String> jobs = new ArrayList<>();
                 try (Connection connection = getConnection();
-                     PreparedStatement statement = connection.prepareStatement("SELECT DISTINCT t.primary_title, t.title_id , ci.job_category " +
+                     PreparedStatement statement = connection.prepareStatement("SELECT DISTINCT ci.job_category " +
                              "FROM titles t " +
                              "JOIN cast_info ci ON t.title_id = ci.title_id " +
                              "WHERE t.primary_title LIKE ? LIMIT 20")) {
@@ -93,6 +92,9 @@ public class BasicJDBCTest {
             Collection<String> query1 = jdbcTask2Interface.getTitlesPerYear(2022);
             System.out.println("Query 1 - First 20 titles that were released in 2022: ");
             printResults(query1);
+            Collection<String> query2 = jdbcTask2Interface.getJobCategoriesFromTitles("mario");
+            System.out.println("Query 2 - Categories that are related to the word mario");
+            printResults(query2);
             Collection<String> query4 = jdbcTask2Interface.getPlayedCharacters("Brad Pitt");
             System.out.println("Query 4 - All characters that are played by Brad Pitt: ");
             printResults(query4);
