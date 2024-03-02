@@ -14,7 +14,7 @@ public class BasicJDBCTest {
             private static final String URL = "jdbc:postgresql://localhost:5432/imdb";
             private static final String USERNAME = "postgres";
 
-            private static final String PASSWORD = "Sanoma1705";
+            private static final String PASSWORD = "";
 
             @Override
             public Connection getConnection() throws ClassNotFoundException, SQLException {
