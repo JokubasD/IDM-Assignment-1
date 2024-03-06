@@ -36,7 +36,7 @@ public interface BgtDataManager {
      * @return collection of all players containing the param substring in their names
      * @throws BgtException the bgt exception
      */
-    public Collection<Player> findPlayersByName(String name) throws BgtException;
+    public Collection<Player> findPlayersByName(String name) throws BgtException, SQLException;
         // @TODO: Implement this method.
 
     /**

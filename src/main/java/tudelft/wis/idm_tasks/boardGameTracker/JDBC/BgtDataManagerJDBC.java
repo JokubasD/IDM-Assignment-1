@@ -54,8 +54,23 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     }
 
     @Override
-    public Collection<Player> findPlayersByName(String name) throws BgtException {
-        return null;
+    public Collection<Player> findPlayersByName(String name) throws BgtException, SQLException {
+        Collection<Player> players = new ArrayList<>();
+        PreparedStatement findPlayersSQL = connection.prepareStatement("SELECT * FROM player WHERE name LIKE ?");
+        findPlayersSQL.setString(1, "%" + name + "%");
+        try (Statement statement = connection.createStatement()) {
+            try (ResultSet resultSet = findPlayersSQL.executeQuery()) {
+                while (resultSet.next()) {
+                    String playerName = resultSet.getString("name");
+                    String nickname = resultSet.getString("nickname");
+                    players.add(new PlayerJDBC(playerName, nickname));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return players;
     }
 
     @Override
