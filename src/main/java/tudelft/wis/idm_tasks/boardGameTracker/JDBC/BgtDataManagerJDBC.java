@@ -7,6 +7,7 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -15,7 +16,7 @@ import static java.sql.DriverManager.getConnection;
 public class BgtDataManagerJDBC implements BgtDataManager {
     private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/Boardgame";
     private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "Sanoma1705";
 
     // JDBC connection
     private Connection connection;
@@ -82,7 +83,21 @@ public class BgtDataManagerJDBC implements BgtDataManager {
 
     @Override
     public Collection<BoardGame> findGamesByName(String name) throws BgtException {
-        return null;
+        Collection<BoardGame> boardgames = new ArrayList<>();
+        try (             PreparedStatement statement = connection.prepareStatement("SELECT * " +
+                     "FROM boardgame" +
+                     " WHERE name LIKE ? ")) {
+            statement.setString(1, name);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    BoardGameJDBC game = new BoardGameJDBC(resultSet.getString("name"), resultSet.getString("bggurl"));
+                    boardgames.add(game);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return boardgames;
     }
 
     @Override

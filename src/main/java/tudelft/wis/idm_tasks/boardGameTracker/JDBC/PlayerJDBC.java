@@ -30,6 +30,11 @@ public class PlayerJDBC implements tudelft.wis.idm_tasks.boardGameTracker.interf
 
     @Override
     public String toVerboseString() {
-        return null;
+        return "This is the players name: " + name + "\nThis is the players nickname: " + nickname;
+    }
+
+    @Override
+    public String toString() {
+        return toVerboseString();
     }
 }

@@ -21,6 +21,11 @@ public class BoardGameJDBC implements tudelft.wis.idm_tasks.boardGameTracker.int
 
     @Override
     public String toVerboseString() {
-        return null;
+        return "This is the game name: " + name + "\nThis is the game url: " + bgg_url;
+    }
+
+    @Override
+    public String toString() {
+        return toVerboseString();
     }
 }
