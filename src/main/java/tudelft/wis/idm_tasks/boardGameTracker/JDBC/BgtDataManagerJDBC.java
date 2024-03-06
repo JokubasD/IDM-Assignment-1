@@ -54,11 +54,10 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     }
 
     @Override
-    public Collection<Player> findPlayersByName(String name) throws BgtException, SQLException {
+    public Collection<Player> findPlayersByName(String name) throws BgtException {
         Collection<Player> players = new ArrayList<>();
-        PreparedStatement findPlayersSQL = connection.prepareStatement("SELECT * FROM player WHERE name LIKE ?");
-        findPlayersSQL.setString(1, "%" + name + "%");
-        try (Statement statement = connection.createStatement()) {
+        try (PreparedStatement findPlayersSQL = connection.prepareStatement("SELECT * FROM player WHERE name LIKE ?");) {
+            findPlayersSQL.setString(1, "%" + name + "%");
             try (ResultSet resultSet = findPlayersSQL.executeQuery()) {
                 while (resultSet.next()) {
                     String playerName = resultSet.getString("name");
@@ -99,7 +98,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     @Override
     public Collection<BoardGame> findGamesByName(String name) throws BgtException {
         Collection<BoardGame> boardgames = new ArrayList<>();
-        try (             PreparedStatement statement = connection.prepareStatement("SELECT * " +
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * " +
                      "FROM boardgame" +
                      " WHERE name LIKE ? ")) {
             statement.setString(1, name);
@@ -116,6 +115,16 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     }
 
     @Override
+    public void persistPlayer(Player player) {
+
+    }
+
+    @Override
+    public void persistBoardGame(BoardGame game) {
+
+    }
+    // DO NOT NEED TO IMPLEMENT FOR JDBC
+    @Override
     public PlaySession createNewPlaySession(Date date, Player host, BoardGame game, int playtime, Collection<Player> players, Player winner) throws BgtException {
         return null; //Do not need to implement
     }
@@ -124,20 +133,9 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     public Collection<PlaySession> findSessionByDate(Date date) throws BgtException {
         return null; //Do not need to implement
     }
-
-    @Override
-    public void persistPlayer(Player player) {
-
-    }
-
     @Override
     public void persistPlaySession(PlaySession session) {
         //Do not need to implement
-    }
-
-    @Override
-    public void persistBoardGame(BoardGame game) {
-
     }
 
 
