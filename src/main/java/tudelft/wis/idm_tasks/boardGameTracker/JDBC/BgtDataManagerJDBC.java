@@ -6,12 +6,11 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.PlaySession;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collection;
-import java.sql.Statement;
 import java.util.Date;
+
+import static java.sql.DriverManager.getConnection;
 
 public class BgtDataManagerJDBC implements BgtDataManager {
     private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/Boardgame";
@@ -23,7 +22,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
 
     public BgtDataManagerJDBC() {
         try {
-            connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+            connection = getConnection(JDBC_URL, USERNAME, PASSWORD);
             System.out.println("connected successfully");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,13 +35,20 @@ public class BgtDataManagerJDBC implements BgtDataManager {
                 + "name VARCHAR(255) NOT NULL,"
                 + "nickname VARCHAR(255) NOT NULL"
                 + ")";
+
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(createTableSQL);
             System.out.println("Player table created successfully (if it didn't already exist).");
+            try(
+                    PreparedStatement statement2 = connection.prepareStatement("INSERT INTO player (name, nickname) " +
+                            "VALUES (?, ?)")) {
+                statement2.setString(1, name);
+                statement2.setString(2, nickname);
+                statement2.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
