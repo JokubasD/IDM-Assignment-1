@@ -49,7 +49,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new PlayerJDBC(name, nickname);
     }
 
     @Override
@@ -67,11 +67,16 @@ public class BgtDataManagerJDBC implements BgtDataManager {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(createTableSQL);
             System.out.println("Boardgame table created successfully (if it didn't already exist).");
-
+            try(
+                    PreparedStatement statement2 = connection.prepareStatement("INSERT INTO boardgame (name, bggurl) " +
+                            "VALUES (?, ?)")) {
+                statement2.setString(1, name);
+                statement2.setString(2, bggURL);
+                statement2.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return new BoardGameJDBC(name, bggURL);
     }
 
