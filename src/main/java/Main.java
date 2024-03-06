@@ -6,7 +6,7 @@ public class Main {
         BgtDataManagerJDBC bgtDataManagerJDBC = new BgtDataManagerJDBC();
 //        bgtDataManagerJDBC.createNewPlayer("Noah", "Luigi");
 //        bgtDataManagerJDBC.createNewBoardgame("Adrien", "google.com");
-//        System.out.println(bgtDataManagerJDBC.findGamesByName("Adrien"));
+        System.out.println(bgtDataManagerJDBC.findGamesByName("Adrien"));
         System.out.println(bgtDataManagerJDBC.findPlayersByName("Noah"));
     }
 }

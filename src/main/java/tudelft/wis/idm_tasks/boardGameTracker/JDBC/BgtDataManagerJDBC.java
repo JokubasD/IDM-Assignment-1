@@ -56,9 +56,11 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     @Override
     public Collection<Player> findPlayersByName(String name) throws BgtException {
         Collection<Player> players = new ArrayList<>();
-        try (PreparedStatement findPlayersSQL = connection.prepareStatement("SELECT * FROM player WHERE name LIKE ?");) {
-            findPlayersSQL.setString(1, "%" + name + "%");
-            try (ResultSet resultSet = findPlayersSQL.executeQuery()) {
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * " +
+                "FROM player" +
+                " WHERE name LIKE ? ")) {
+            statement.setString(1, "%" + name + "%");
+            try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     String playerName = resultSet.getString("name");
                     String nickname = resultSet.getString("nickname");
@@ -68,10 +70,8 @@ public class BgtDataManagerJDBC implements BgtDataManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return players;
-    }
-
+        }
     @Override
     public BoardGame createNewBoardgame(String name, String bggURL) throws BgtException {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Boardgame ("
@@ -101,7 +101,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
         try (PreparedStatement statement = connection.prepareStatement("SELECT * " +
                      "FROM boardgame" +
                      " WHERE name LIKE ? ")) {
-            statement.setString(1, name);
+            statement.setString(1, "%" + name + "%");
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     BoardGameJDBC game = new BoardGameJDBC(resultSet.getString("name"), resultSet.getString("bggurl"));
