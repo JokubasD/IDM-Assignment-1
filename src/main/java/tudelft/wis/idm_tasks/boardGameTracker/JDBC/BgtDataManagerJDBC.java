@@ -54,24 +54,24 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     }
 
     @Override
-    public Collection<Player> findPlayersByName(String name) throws BgtException, SQLException {
+    public Collection<Player> findPlayersByName(String name) throws BgtException {
         Collection<Player> players = new ArrayList<>();
-        PreparedStatement findPlayersSQL = connection.prepareStatement("SELECT * FROM player WHERE name LIKE ?");
-        findPlayersSQL.setString(1, "%" + name + "%");
-            try (ResultSet resultSet = findPlayersSQL.executeQuery()) {
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * " +
+                "FROM player" +
+                " WHERE name LIKE ? ")) {
+            statement.setString(1, "%" + name + "%");
+            try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     String playerName = resultSet.getString("name");
                     String nickname = resultSet.getString("nickname");
                     players.add(new PlayerJDBC(playerName, nickname));
                 }
             }
-         catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return players;
-    }
-
+        }
     @Override
     public BoardGame createNewBoardgame(String name, String bggURL) throws BgtException {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Boardgame ("
@@ -98,10 +98,10 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     @Override
     public Collection<BoardGame> findGamesByName(String name) throws BgtException {
         Collection<BoardGame> boardgames = new ArrayList<>();
-        try (             PreparedStatement statement = connection.prepareStatement("SELECT * " +
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * " +
                      "FROM boardgame" +
                      " WHERE name LIKE ? ")) {
-            statement.setString(1, name);
+            statement.setString(1, "%" + name + "%");
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     BoardGameJDBC game = new BoardGameJDBC(resultSet.getString("name"), resultSet.getString("bggurl"));
@@ -115,6 +115,16 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     }
 
     @Override
+    public void persistPlayer(Player player) {
+
+    }
+
+    @Override
+    public void persistBoardGame(BoardGame game) {
+
+    }
+    // DO NOT NEED TO IMPLEMENT FOR JDBC
+    @Override
     public PlaySession createNewPlaySession(Date date, Player host, BoardGame game, int playtime, Collection<Player> players, Player winner) throws BgtException {
         return null; //Do not need to implement
     }
@@ -123,20 +133,9 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     public Collection<PlaySession> findSessionByDate(Date date) throws BgtException {
         return null; //Do not need to implement
     }
-
-    @Override
-    public void persistPlayer(Player player) {
-
-    }
-
     @Override
     public void persistPlaySession(PlaySession session) {
         //Do not need to implement
-    }
-
-    @Override
-    public void persistBoardGame(BoardGame game) {
-
     }
 
 

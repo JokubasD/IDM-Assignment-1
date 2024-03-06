@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class BasicJDBCTest {
+public class IMDB_JDBC {
     public static void main(String[] args) {
         JDBCTask2Interface jdbcTask2Interface = new JDBCTask2Interface() {
             private static final String URL = "jdbc:postgresql://localhost:5432/imdb";
