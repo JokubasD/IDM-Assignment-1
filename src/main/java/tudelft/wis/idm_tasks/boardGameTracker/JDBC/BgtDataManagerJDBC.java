@@ -13,17 +13,17 @@ import java.util.Collection;
 import java.util.Date;
 
 public class BgtDataManagerJDBC implements BgtDataManager {
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/Boardgame";
+    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/Boardgame";
     private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "your_password";
+    private static final String PASSWORD = "";
 
     // JDBC connection
     private Connection connection;
 
     public BgtDataManagerJDBC() {
         try {
-            // Establish connection to the database
             connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+            System.out.println("connected successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
