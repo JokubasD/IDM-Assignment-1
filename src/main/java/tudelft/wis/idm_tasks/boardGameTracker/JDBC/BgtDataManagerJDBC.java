@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.sql.Statement;
 import java.util.Date;
 
 public class BgtDataManagerJDBC implements BgtDataManager {
@@ -28,7 +29,6 @@ public class BgtDataManagerJDBC implements BgtDataManager {
             e.printStackTrace();
         }
     }
-
     @Override
     public Player createNewPlayer(String name, String nickname) throws BgtException {
         return null;
@@ -51,12 +51,12 @@ public class BgtDataManagerJDBC implements BgtDataManager {
 
     @Override
     public PlaySession createNewPlaySession(Date date, Player host, BoardGame game, int playtime, Collection<Player> players, Player winner) throws BgtException {
-        return null;
+        return null; //Do not need to implement
     }
 
     @Override
     public Collection<PlaySession> findSessionByDate(Date date) throws BgtException {
-        return null;
+        return null; //Do not need to implement
     }
 
     @Override
@@ -66,7 +66,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
 
     @Override
     public void persistPlaySession(PlaySession session) {
-
+        //Do not need to implement
     }
 
     @Override
