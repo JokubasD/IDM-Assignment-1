@@ -31,6 +31,18 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     }
     @Override
     public Player createNewPlayer(String name, String nickname) throws BgtException {
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS Player ("
+                + "id SERIAL PRIMARY KEY,"
+                + "name VARCHAR(255) NOT NULL,"
+                + "nickname VARCHAR(255) NOT NULL"
+                + ")";
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(createTableSQL);
+            System.out.println("Player table created successfully (if it didn't already exist).");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 
@@ -41,6 +53,18 @@ public class BgtDataManagerJDBC implements BgtDataManager {
 
     @Override
     public BoardGame createNewBoardgame(String name, String bggURL) throws BgtException {
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS Boardgame ("
+                + "id SERIAL PRIMARY KEY,"
+                + "name VARCHAR(255) NOT NULL,"
+                + "bggURL VARCHAR(255) NOT NULL"
+                + ")";
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(createTableSQL);
+            System.out.println("Boardgame table created successfully (if it didn't already exist).");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 

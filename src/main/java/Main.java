@@ -1,9 +1,9 @@
-import tudelft.wis.idm_tasks.boardGameTracker.BoardGameSetup;
+import tudelft.wis.idm_tasks.boardGameTracker.JDBC.BgtDataManagerJDBC;
 
 public class Main {
     public static void main(String[] args) {
-        BoardGameSetup boardGameSetup = new BoardGameSetup();
-        boardGameSetup.createPlayertable();
-        boardGameSetup.createBoardgame();
+        BgtDataManagerJDBC bgtDataManagerJDBC = new BgtDataManagerJDBC();
+        bgtDataManagerJDBC.createNewPlayer("Noah", "Luigi");
+        bgtDataManagerJDBC.createNewBoardgame("Adrien", "google.com");
     }
 }
