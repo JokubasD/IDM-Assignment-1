@@ -61,11 +61,12 @@ public class BgtDataManagerJDBC implements BgtDataManager {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(createTableSQL);
             System.out.println("Boardgame table created successfully (if it didn't already exist).");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return new BoardGameJDBC(name, bggURL);
     }
 
     @Override
