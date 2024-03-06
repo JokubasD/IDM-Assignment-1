@@ -16,7 +16,7 @@ import static java.sql.DriverManager.getConnection;
 public class BgtDataManagerJDBC implements BgtDataManager {
     private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/Boardgame";
     private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "Sanoma1705";
 
     // JDBC connection
     private Connection connection;
@@ -58,7 +58,6 @@ public class BgtDataManagerJDBC implements BgtDataManager {
         Collection<Player> players = new ArrayList<>();
         PreparedStatement findPlayersSQL = connection.prepareStatement("SELECT * FROM player WHERE name LIKE ?");
         findPlayersSQL.setString(1, "%" + name + "%");
-        try (Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = findPlayersSQL.executeQuery()) {
                 while (resultSet.next()) {
                     String playerName = resultSet.getString("name");
@@ -66,7 +65,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
                     players.add(new PlayerJDBC(playerName, nickname));
                 }
             }
-        } catch (SQLException e) {
+         catch (SQLException e) {
             e.printStackTrace();
         }
 
