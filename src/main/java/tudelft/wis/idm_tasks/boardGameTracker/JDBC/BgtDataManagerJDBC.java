@@ -16,7 +16,7 @@ import static java.sql.DriverManager.getConnection;
 public class BgtDataManagerJDBC implements BgtDataManager {
     private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/Boardgame";
     private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "Sanoma1705";
+    private static final String PASSWORD = "";
 
     // JDBC connection
     private Connection connection;
