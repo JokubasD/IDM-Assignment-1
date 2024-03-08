@@ -115,8 +115,30 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     }
 
     @Override
-    public void persistPlayer(Player player) {
-
+    public void persistPlayer(Player player) throws BgtException {
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * " +
+                "FROM player" +
+                " WHERE name LIKE ? ")) {
+            statement.setString(1, player.getPlayerName());
+            ResultSet set = statement.executeQuery();
+            if (set != null && set.next()) {
+                String updateSQL = "UPDATE player SET nickname = ? WHERE name = ?";
+                try (PreparedStatement updateStatement = connection.prepareStatement(updateSQL)){
+                    updateStatement.setString(1, player.getPlayerNickName());
+                    updateStatement.setString(2, player.getPlayerName());
+                    int rowsChanged = updateStatement.executeUpdate();
+                    if (rowsChanged > 0) {
+                        System.out.println("Player updated successfully.");
+                    } else {
+                        System.out.println("No player found with the specified name.");
+                    }
+                }
+            } else {
+                createNewPlayer(player.getPlayerName(), player.getPlayerNickName());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

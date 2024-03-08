@@ -37,15 +37,14 @@ public class PlayerJDBC implements tudelft.wis.idm_tasks.boardGameTracker.interf
 
     @Override
     public String toVerboseString() {
-        String boardGameString = boardGames == null ? "no board games"
-                : "";
+        String boardGameString = boardGames == null ? "no board games" : "";
         if (boardGames != null) {
             for (BoardGame game : boardGames) {
                 boardGameString += game.toVerboseString() + "\n";
             }
         }
         return "Player " + name + ", " +
-                "with " + nickname + ", "
+                "with nickname " + nickname + ", "
                 + boardGameString;
     }
 
