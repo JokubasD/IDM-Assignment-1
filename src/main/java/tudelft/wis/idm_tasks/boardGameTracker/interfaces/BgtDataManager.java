@@ -93,7 +93,7 @@ public interface BgtDataManager {
      * Persists a given player to the DB. Note that this player might already exist and only needs an update :-)
      * @param player the player
      */
-    public void persistPlayer(Player player);
+    public void persistPlayer(Player player) throws BgtException;
         // @TODO: Implement this method.
 
     /**
