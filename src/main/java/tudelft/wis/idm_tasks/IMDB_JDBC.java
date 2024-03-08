@@ -113,6 +113,7 @@ public class IMDB_JDBC {
             System.out.println("Query 4 - All characters that are played by Brad Pitt: ");
             printResults(query4);
             connection.close();
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

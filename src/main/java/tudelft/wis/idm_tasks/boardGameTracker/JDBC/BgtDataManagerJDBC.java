@@ -16,7 +16,7 @@ import static java.sql.DriverManager.getConnection;
 public class BgtDataManagerJDBC implements BgtDataManager {
     private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/Boardgame";
     private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "Sanoma1705";
 
     // JDBC connection
     private Connection connection;
@@ -118,7 +118,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
     public void persistPlayer(Player player) throws BgtException {
         try (PreparedStatement statement = connection.prepareStatement("SELECT * " +
                 "FROM player" +
-                " WHERE name LIKE ? ")) {
+                " WHERE name = ? ")) {
             statement.setString(1, player.getPlayerName());
             ResultSet set = statement.executeQuery();
             if (set != null && set.next()) {
@@ -143,7 +143,31 @@ public class BgtDataManagerJDBC implements BgtDataManager {
 
     @Override
     public void persistBoardGame(BoardGame game) {
-
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * " +
+                "FROM boardgame" +
+                " WHERE name = ? ")) {
+            statement.setString(1, game.getName());
+            ResultSet set = statement.executeQuery();
+            if (set != null && set.next()) {
+                String updateSQL = "UPDATE boardgame SET bggurl = ? WHERE name = ?";
+                try (PreparedStatement updateStatement = connection.prepareStatement(updateSQL)){
+                    updateStatement.setString(1, game.getBGG_URL());
+                    updateStatement.setString(2, game.getName());
+                    int rowsChanged = updateStatement.executeUpdate();
+                    if (rowsChanged > 0) {
+                        System.out.println("Game updated successfully.");
+                    } else {
+                        System.out.println("No game found with the specified name.");
+                    }
+                }
+            } else {
+                createNewBoardgame(game.getName(), game.getBGG_URL());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (BgtException e) {
+            throw new RuntimeException(e);
+        }
     }
     // DO NOT NEED TO IMPLEMENT FOR JDBC
     @Override
