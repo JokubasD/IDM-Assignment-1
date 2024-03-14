@@ -71,7 +71,7 @@ public class BgtDataManagerJDBC implements BgtDataManager {
             e.printStackTrace();
         }
         return players;
-        }
+    }
     @Override
     public BoardGame createNewBoardgame(String name, String bggURL) throws BgtException {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Boardgame ("
