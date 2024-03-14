@@ -22,6 +22,9 @@ public class PlayerJPA implements Player {
     private Collection<BoardGame> gameCollection;
 
 
+    public PlayerJPA() {
+    }
+
     @Override
     public String getPlayerName() {
         return null;
