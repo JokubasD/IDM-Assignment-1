@@ -9,6 +9,8 @@
         </description>
 
         <class>tudelft.wis.idm_tasks.boardGameTracker.JPA.BoardGameJPA</class>
+        <class>tudelft.wis.idm_tasks.boardGameTracker.JPA.PlayerJPA</class>
+        <class>tudelft.wis.idm_tasks.boardGameTracker.JPA.PlaySessionJPA</class>
 
         <properties>
             <!-- Database connection settings -->

@@ -4,7 +4,9 @@ import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Table(name = "players")
 @Entity
@@ -19,10 +21,17 @@ public class PlayerJPA implements Player {
 
     @JoinColumn(name = "player_id")
     @OneToMany
-    private Collection<BoardGame> gameCollection;
+    private Collection<BoardGameJPA> gameCollection;
 
 
     public PlayerJPA() {
+    }
+
+    public PlayerJPA(Long id, String name, String nickname, Collection<BoardGameJPA> gameCollection) {
+        this.id = id;
+        this.name = name;
+        this.nickname = nickname;
+        this.gameCollection = gameCollection;
     }
 
     @Override
@@ -36,7 +45,11 @@ public class PlayerJPA implements Player {
     }
 
     public Collection<BoardGame> getGameCollection() {
-        return gameCollection;
+        List<BoardGame> boardInterface = new ArrayList<>();
+        for (BoardGameJPA boardGameJPA : gameCollection) {
+            boardInterface.add(boardGameJPA);
+        }
+        return boardInterface;
     }
 
     @Override
@@ -64,7 +77,7 @@ public class PlayerJPA implements Player {
         this.nickname = nickname;
     }
 
-    public void setGameCollection(Collection<BoardGame> gameCollection) {
+    public void setGameCollection(Collection<BoardGameJPA> gameCollection) {
         this.gameCollection = gameCollection;
     }
 }

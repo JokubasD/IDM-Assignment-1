@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "board_games") // Specify the name of the database table
+@Table(name = "board_games")
 public class BoardGameJPA implements BoardGame {
 
     @Id
@@ -34,6 +34,15 @@ public class BoardGameJPA implements BoardGame {
     public String getBGG_URL() {
         return bggUrl;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBggUrl(String bggUrl) {
+        this.bggUrl = bggUrl;
+    }
+
     @Override
     public String toVerboseString() {
         return "BoardGameJPA{" +

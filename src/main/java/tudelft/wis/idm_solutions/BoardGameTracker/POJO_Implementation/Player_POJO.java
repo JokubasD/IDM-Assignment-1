@@ -6,6 +6,7 @@ package tudelft.wis.idm_solutions.BoardGameTracker.POJO_Implementation;
 
 import java.util.Collection;
 import java.util.LinkedList;
+
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player;
 

@@ -31,6 +31,7 @@ public interface Player {
     
     /**
      * Returns all the boardgames this player owns (if any).
+     *
      * @return collection of boardgames this player owns
      */
     public Collection<BoardGame> getGameCollection();
@@ -43,6 +44,5 @@ public interface Player {
      * @return the string representation of the object
      */
     public String toVerboseString();
-        // @TODO: Implement this method.
     
 }

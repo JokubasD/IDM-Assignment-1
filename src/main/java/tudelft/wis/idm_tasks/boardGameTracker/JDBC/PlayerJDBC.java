@@ -2,16 +2,18 @@ package tudelft.wis.idm_tasks.boardGameTracker.JDBC;
 
 import tudelft.wis.idm_tasks.boardGameTracker.interfaces.BoardGame;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class PlayerJDBC implements tudelft.wis.idm_tasks.boardGameTracker.interfaces.Player {
     String name;
     String nickname;
-    Collection<BoardGame> boardGames = null;
+    Collection<BoardGame> boardGames ;
 
     public PlayerJDBC(String name, String nickname) {
         this.name = name;
         this.nickname = nickname;
+        this.boardGames = new ArrayList<>();
     }
     public PlayerJDBC(String name, String nickname, Collection<BoardGame> games) {
         this.name = name;
@@ -30,9 +32,13 @@ public class PlayerJDBC implements tudelft.wis.idm_tasks.boardGameTracker.interf
         return nickname;
     }
 
+
     @Override
     public Collection<BoardGame> getGameCollection() {
-        return boardGames;
+        if (boardGames == null) {
+            boardGames = new ArrayList<>();
+        }
+        return boardGames.isEmpty() ? new ArrayList<>() : boardGames;
     }
 
     @Override
