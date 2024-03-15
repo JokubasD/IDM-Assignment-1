@@ -39,7 +39,6 @@ public class BgtDataManagerJDBC implements BgtDataManager {
 
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(createTableSQL);
-            System.out.println("Player table created successfully (if it didn't already exist).");
             try(
                     PreparedStatement statement2 = connection.prepareStatement("INSERT INTO player (name, nickname) " +
                             "VALUES (?, ?)")) {
@@ -81,7 +80,6 @@ public class BgtDataManagerJDBC implements BgtDataManager {
                 + ")";
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(createTableSQL);
-            System.out.println("Boardgame table created successfully (if it didn't already exist).");
             try(
                     PreparedStatement statement2 = connection.prepareStatement("INSERT INTO boardgame (name, bggurl) " +
                             "VALUES (?, ?)")) {
